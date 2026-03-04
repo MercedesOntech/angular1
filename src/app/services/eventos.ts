@@ -1,27 +1,25 @@
-// src/app/services/eventos.service.ts
+// src/app/services/evento.service.ts
 import { Injectable } from '@angular/core';
 
 export interface Evento {
   titulo: string;
+  descripcion: string;
   fecha: string;
   lugar: string;
-  descripcion: string;
+  precio: number;
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class EventosService {
+export class EventoService {
   private eventos: Evento[] = [];
+
+  getEventos(): Evento[] {
+    return this.eventos;
+  }
 
   agregarEvento(evento: Evento) {
     this.eventos.push(evento);
-    localStorage.setItem('eventos', JSON.stringify(this.eventos));
-  }
-
-  obtenerEventos(): Evento[] {
-    const guardados = localStorage.getItem('eventos');
-    if (guardados) this.eventos = JSON.parse(guardados);
-    return this.eventos;
   }
 }

@@ -1,13 +1,21 @@
 <div class="container mt-4">
-  <h2>Lista de Eventos</h2>
+  <h2>Eventos</h2>
 
   <div class="row">
-    <div class="col-md-4" *ngFor="let evento of eventos">
-      <app-evento-card [evento]="evento"></app-evento-card>
+    <div class="col-md-4 mb-3" *ngFor="let evento of eventos">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ evento.titulo }}</h5>
+          <p class="card-text">{{ evento.descripcion }}</p>
+          <p class="card-text"><strong>Fecha:</strong> {{ evento.fecha }}</p>
+          <p class="card-text"><strong>Lugar:</strong> {{ evento.lugar }}</p>
+          <p class="card-text"><strong>Precio:</strong> {{ evento.precio }}€</p>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div *ngIf="eventos.length === 0" class="alert alert-info mt-3">
-    No hay eventos creados todavía.
+  <div *ngIf="eventos.length === 0">
+    <p>No hay eventos todavía</p>
   </div>
 </div>

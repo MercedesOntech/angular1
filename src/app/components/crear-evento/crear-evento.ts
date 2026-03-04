@@ -1,45 +1,40 @@
 // src/app/components/crear-evento/crear-evento.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { EventosService, Evento } from '../../services/eventos';
-import { NgIf, NgFor } from '@angular/common';
+import { EventoService, Evento } from '../../services/eventos';
 
 @Component({
   selector: 'app-crear-evento',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NgIf, NgFor],
+  imports: [CommonModule, FormsModule],
   templateUrl: './crear-evento.html',
   styleUrls: ['./crear-evento.css']
 })
 export class CrearEvento {
-  formEvento: FormGroup;
+  titulo = '';
+  descripcion = '';
+  fecha = '';
+  lugar = '';
+  precio!: number;
   enviado = false;
-  mensaje = '';
 
-  constructor(private fb: FormBuilder, private eventosService: EventosService, private router: Router) {
-    this.formEvento = this.fb.group({
-      titulo: ['', [Validators.required, Validators.minLength(3)]],
-      descripcion: ['', Validators.required],
-      fecha: ['', Validators.required],
-      lugar: ['', Validators.required],
-      precio: ['', [Validators.required, Validators.min(0)]]
-    });
-  }
+  constructor(private eventoService: EventoService, private router: Router) {}
 
-  get f() {
-    return this.formEvento.controls;
-  }
-
-  onSubmit() {
+  guardar(form: NgForm) {
     this.enviado = true;
-    if (this.formEvento.valid) {
-      const nuevoEvento: Evento = this.formEvento.value;
-      this.eventosService.agregarEvento(nuevoEvento);
-      this.mensaje = 'Evento creado correctamente';
-      this.formEvento.reset();
-      this.enviado = false;
+    if (form.valid) {
+      const nuevoEvento: Evento = {
+        titulo: this.titulo,
+        descripcion: this.descripcion,
+        fecha: this.fecha,
+        lugar: this.lugar,
+        precio: this.precio
+      };
+      this.eventoService.agregarEvento(nuevoEvento);
+      form.resetForm();
+      this.router.navigate(['/eventos']);
     }
   }
 }

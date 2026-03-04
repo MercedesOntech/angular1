@@ -6,9 +6,7 @@ import { Header } from './components/header/header';
   selector: 'app-root',
   standalone: true,
   imports: [Header, RouterOutlet],
-  template: `
-    <app-header></app-header>
-    <router-outlet></router-outlet>
-  `
+  templateUrl: './app.html',
+  styleUrls: ['./app.css']
 })
 export class App {}

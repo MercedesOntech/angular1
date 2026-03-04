@@ -1,11 +1,55 @@
-<nav *ngIf="auth.estaLogueado()" class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" [routerLink]="['/home']">EventMaster</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-  <div class="ms-auto">
-    <!-- Enlace al crear evento -->
-    <a class="btn btn-primary me-2" [routerLink]="['/crear']">Crear evento</a>
+  <div class="container">
 
-    <!-- Cerrar sesión -->
-    <button class="btn btn-danger" (click)="auth.logout()">Cerrar sesión</button>
+    <a class="navbar-brand" routerLink="/">EventMaster</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+      <!-- MENÚ SOLO SI ESTÁ LOGUEADO -->
+      <ul class="navbar-nav me-auto" *ngIf="auth.estaLogueado()">
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/eventos">Eventos</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/crear">Crear Evento</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/acerca-de">Acerca de</a>
+        </li>
+
+      </ul>
+
+      <!-- BOTONES DERECHA -->
+      <div class="ms-auto">
+
+        <a *ngIf="!auth.estaLogueado()" 
+           class="btn btn-outline-light"
+           routerLink="/login">
+           Login
+        </a>
+
+        <button *ngIf="auth.estaLogueado()" 
+                class="btn btn-danger"
+                (click)="logout()">
+          Cerrar sesión
+        </button>
+
+      </div>
+
+    </div>
+
   </div>
 </nav>
