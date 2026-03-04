@@ -1,0 +1,13 @@
+/* Estilo básico para tablas y secciones */
+
+section {
+  margin-bottom: 2rem;
+}
+
+table {
+  width: 100%;
+}
+
+h2, h4 {
+  color: #343a40;
+}

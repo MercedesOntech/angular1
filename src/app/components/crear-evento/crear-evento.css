@@ -1,0 +1,9 @@
+/* Margen y estilos básicos */
+.container {
+  max-width: 600px;
+}
+
+/* Resaltar campos inválidos */
+.is-invalid {
+  border-color: #dc3545;
+}

@@ -1,0 +1,80 @@
+<div class="container mt-4">
+
+  <h2 class="mb-3">Acerca de</h2>
+
+  <!-- Información del autor -->
+  <section class="mb-4">
+    <h4>Autor</h4>
+    <p><strong>Nombre:</strong> {{ autor.nombre }}</p>
+    <p><strong>Email:</strong> {{ autor.email }}</p>
+    <p><strong>GitHub:</strong> <a [href]="autor.github" target="_blank">{{ autor.github }}</a></p>
+  </section>
+
+  <!-- Tecnologías -->
+  <section class="mb-4">
+    <h4>Tecnologías y herramientas utilizadas</h4>
+    <table class="table table-bordered table-striped">
+      <thead class="table-light">
+        <tr>
+          <th>Tipo</th>
+          <th>Herramientas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tech of tecnologias">
+          <td>{{ tech.tipo }}</td>
+          <td>{{ tech.herramientas }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Directivas usadas -->
+  <section class="mb-4">
+    <h4>Directivas usadas</h4>
+    <table class="table table-bordered table-striped">
+      <thead class="table-light">
+        <tr>
+          <th>Directiva</th>
+          <th>Tipo</th>
+          <th>Componente</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dir of directivas">
+          <td>{{ dir.nombre }}</td>
+          <td>{{ dir.tipo }}</td>
+          <td>{{ dir.componente }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Usuarios de prueba -->
+  <section class="mb-4">
+    <h4>Usuarios de prueba</h4>
+    <table class="table table-bordered table-striped">
+      <thead class="table-light">
+        <tr>
+          <th>Usuario</th>
+          <th>Contraseña</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let u of usuarios">
+          <td>{{ u.username }}</td>
+          <td>{{ u.password }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Bibliografía -->
+  <section class="mb-4">
+    <h4>Bibliografía</h4>
+    <ul>
+      <li *ngFor="let b of bibliografia">{{ b }}</li>
+    </ul>
+  </section>
+
+</div>

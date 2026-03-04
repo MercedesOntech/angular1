@@ -1,0 +1,14 @@
+<div class="card mb-3" [ngClass]="{'border-danger': evento.importante}" [ngStyle]="{'background-color': evento.importante ? '#fff3f3' : '#fff'}">
+  <div class="card-body">
+    <h5 class="card-title">{{ evento.titulo | mayusculas }}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{ evento.tipo }}</h6>
+    <p class="card-text">{{ evento.descripcion }}</p>
+    <p class="card-text">
+      <small class="text-muted">Fecha: {{ evento.fecha | date:'dd/MM/yyyy' }}</small>
+    </p>
+    <p class="card-text">
+      <strong>Precio:</strong> {{ evento.precio | currency:'EUR':'symbol' }}
+    </p>
+    <button class="btn btn-danger btn-sm" (click)="eliminarEvento()">Borrar</button>
+  </div>
+</div>

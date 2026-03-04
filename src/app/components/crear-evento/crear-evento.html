@@ -1,0 +1,57 @@
+<div class="container mt-4">
+  <h2>Crear Evento</h2>
+  <form [formGroup]="eventoForm" (ngSubmit)="guardarEvento()">
+
+    <!-- Título -->
+    <div class="mb-3">
+      <label class="form-label">Título</label>
+      <input type="text" formControlName="titulo" class="form-control"
+        [ngClass]="{'is-invalid': enviado && f.titulo.invalid}">
+      <div class="invalid-feedback" *ngIf="f.titulo.errors?.required">El título es obligatorio.</div>
+      <div class="invalid-feedback" *ngIf="f.titulo.errors?.minlength">Mínimo 3 caracteres.</div>
+    </div>
+
+    <!-- Tipo -->
+    <div class="mb-3">
+      <label class="form-label">Tipo de Evento</label>
+      <select formControlName="tipo" class="form-select"
+        [ngClass]="{'is-invalid': enviado && f.tipo.invalid}">
+        <option value="">-- Selecciona --</option>
+        <option *ngFor="let tipo of tiposEvento" [value]="tipo">{{ tipo }}</option>
+      </select>
+      <div class="invalid-feedback" *ngIf="f.tipo.errors?.required">El tipo es obligatorio.</div>
+    </div>
+
+    <!-- Fecha -->
+    <div class="mb-3">
+      <label class="form-label">Fecha</label>
+      <input type="date" formControlName="fecha" class="form-control"
+        [ngClass]="{'is-invalid': enviado && f.fecha.invalid}">
+      <div class="invalid-feedback" *ngIf="f.fecha.errors?.required">La fecha es obligatoria.</div>
+    </div>
+
+    <!-- Precio -->
+    <div class="mb-3">
+      <label class="form-label">Precio (€)</label>
+      <input type="number" formControlName="precio" class="form-control"
+        [ngClass]="{'is-invalid': enviado && f.precio.invalid}">
+      <div class="invalid-feedback" *ngIf="f.precio.errors?.required">El precio es obligatorio.</div>
+      <div class="invalid-feedback" *ngIf="f.precio.errors?.min">El precio debe ser ≥ 0.</div>
+    </div>
+
+    <!-- Importante -->
+    <div class="form-check mb-3">
+      <input type="checkbox" formControlName="importante" class="form-check-input" id="importante">
+      <label class="form-check-label" for="importante">Importante</label>
+    </div>
+
+    <!-- Descripción -->
+    <div class="mb-3">
+      <label class="form-label">Descripción</label>
+      <textarea formControlName="descripcion" rows="3" class="form-control"></textarea>
+    </div>
+
+    <!-- Botón Guardar -->
+    <button type="submit" class="btn btn-primary">Guardar Evento</button>
+  </form>
+</div>
