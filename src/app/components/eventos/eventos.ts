@@ -18,4 +18,12 @@ export class Eventoss implements OnInit {
   ngOnInit(): void {
     this.eventos = this.eventoService.getEventos();
   }
+
+  eliminar(index: number){
+    const confirmar = confirm("¿Seguro que quieres elimar este evento?");
+
+    if(confirmar){
+      this.eventoService.eliminarEvento(index);
+    }
+  }
 }

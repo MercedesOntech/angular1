@@ -13,6 +13,7 @@ export interface Evento {
   providedIn: 'root'
 })
 export class EventoService {
+
   private eventos: Evento[] = [];
 
   getEventos(): Evento[] {
@@ -21,5 +22,9 @@ export class EventoService {
 
   agregarEvento(evento: Evento) {
     this.eventos.push(evento);
+  }
+
+  eliminarEvento(index: number) {
+    this.eventos.splice(index, 1);
   }
 }

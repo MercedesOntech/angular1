@@ -2,7 +2,7 @@
   <h2>Eventos</h2>
 
   <div class="row">
-    <div class="col-md-4 mb-3" *ngFor="let evento of eventos">
+    <div class="col-md-4 mb-3" *ngFor="let evento of eventos; let i = index">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">{{ evento.titulo }}</h5>
@@ -10,6 +10,12 @@
           <p class="card-text"><strong>Fecha:</strong> {{ evento.fecha }}</p>
           <p class="card-text"><strong>Lugar:</strong> {{ evento.lugar }}</p>
           <p class="card-text"><strong>Precio:</strong> {{ evento.precio }}€</p>
+
+          <button class="btn btn-danger btn-sm mt-2"
+                  (click)="eliminar(i)">
+            Eliminar
+          </button>
+
         </div>
       </div>
     </div>

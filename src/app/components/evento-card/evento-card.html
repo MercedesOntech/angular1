@@ -1,9 +1,0 @@
-<div class="card mb-3" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">{{ evento.titulo | mayusculas }}</h5>
-    <h6 class="card-subtitle mb-2 text-muted">{{ evento.fecha }}</h6>
-    <p class="card-text">{{ evento.descripcion }}</p>
-    <p class="card-text"><strong>Lugar:</strong> {{ evento.lugar }}</p>
-    <p class="card-text" *ngIf="evento.precio !== undefined"><strong>Precio:</strong> {{ evento.precio | currency:'EUR' }}</p>
-  </div>
-</div>
