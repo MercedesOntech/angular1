@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Eventos, Evento } from '../../services/eventos';
+// src/app/components/eventos/eventos.ts
+import { Component } from '@angular/core';
+import { CommonModule, DatePipe, CurrencyPipe } from '@angular/common';
 import { EventoCard } from '../evento-card/evento-card';
+import { EventosService, Evento } from '../../services/eventos';
 import { MayusculasPipe } from '../../pipes/mayusculas-pipe';
-import { DatePipe, CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-eventos',
@@ -12,23 +12,10 @@ import { DatePipe, CurrencyPipe } from '@angular/common';
   templateUrl: './eventos.html',
   styleUrls: ['./eventos.css']
 })
-export class Eventoss implements OnInit {
-
+export class Eventoss {
   eventos: Evento[] = [];
 
-  constructor(private eventosService: Eventos) {}
-
-  ngOnInit() {
-    this.cargarEventos();
+  constructor(private eventosService: EventosService) {
+    this.eventos = this.eventosService.obtenerEventos();
   }
-
-  cargarEventos() {
-    this.eventos = this.eventosService.getEventos();
-  }
-
-  eliminarEvento(id: number) {
-    this.eventosService.deleteEvento(id);
-    this.cargarEventos();
-  }
-
 }

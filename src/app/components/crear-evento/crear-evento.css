@@ -1,9 +1,8 @@
-/* Margen y estilos básicos */
-.container {
-  max-width: 600px;
-}
-
-/* Resaltar campos inválidos */
+/* Estilos opcionales para el formulario */
 .is-invalid {
   border-color: #dc3545;
+}
+
+.invalid-feedback {
+  display: block;
 }

@@ -1,4 +1,4 @@
-/* Margen para el listado */
-.container {
-  max-width: 800px;
+/* Opcional: espaciado entre tarjetas */
+.row .col-md-4 {
+  margin-bottom: 20px;
 }

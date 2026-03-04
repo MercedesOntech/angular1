@@ -1,12 +1,4 @@
+/* Opcional: estilos de la tarjeta */
 .card {
-  transition: 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.border-danger {
-  border-width: 2px !important;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }

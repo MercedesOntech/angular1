@@ -1,4 +1,6 @@
+// src/app/services/auth.ts
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 export interface Usuario {
   username: string;
@@ -6,24 +8,27 @@ export interface Usuario {
 }
 
 @Injectable({
-  providedIn: 'root' // servicio global singleton
+  providedIn: 'root'
 })
 export class Auth {
+  private usuarioLogueado: Usuario | null = null;
 
-  private usuarios: Usuario[] = [
-    { username: 'admin', password: '1234' },
-    { username: 'user', password: '1234' }
-  ];
+  constructor(private router: Router) {}
 
-  private storageKey = 'usuarioLogueado';
+  // Registrar usuario
+  registrar(usuario: Usuario) {
+    const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+    usuarios.push(usuario);
+    localStorage.setItem('usuarios', JSON.stringify(usuarios));
+  }
 
-  constructor() {}
-
-  // Login: devuelve true si usuario y contraseña correctos
+  // Login
   login(username: string, password: string): boolean {
-    const user = this.usuarios.find(u => u.username === username && u.password === password);
+    const usuarios: Usuario[] = JSON.parse(localStorage.getItem('usuarios') || '[]');
+    const user = usuarios.find(u => u.username === username && u.password === password);
     if (user) {
-      localStorage.setItem(this.storageKey, JSON.stringify(user));
+      this.usuarioLogueado = user;
+      localStorage.setItem('usuarioLogueado', JSON.stringify(user));
       return true;
     }
     return false;
@@ -31,17 +36,23 @@ export class Auth {
 
   // Logout
   logout() {
-    localStorage.removeItem(this.storageKey);
+    this.usuarioLogueado = null;
+    localStorage.removeItem('usuarioLogueado');
+    this.router.navigate(['/login']);
   }
 
-  // Devuelve true si hay usuario logueado
+  // Comprobar si hay sesión activa
   estaLogueado(): boolean {
-    return localStorage.getItem(this.storageKey) !== null;
+    if (this.usuarioLogueado) return true;
+    const user = localStorage.getItem('usuarioLogueado');
+    if (user) {
+      this.usuarioLogueado = JSON.parse(user);
+      return true;
+    }
+    return false;
   }
 
-  // Devuelve usuario logueado
-  getUsuario(): Usuario | null {
-    const user = localStorage.getItem(this.storageKey);
-    return user ? JSON.parse(user) : null;
+  getUsuarioLogueado(): Usuario | null {
+    return this.usuarioLogueado;
   }
 }

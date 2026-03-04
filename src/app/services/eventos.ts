@@ -1,50 +1,27 @@
+// src/app/services/eventos.service.ts
 import { Injectable } from '@angular/core';
 
 export interface Evento {
-  id: number;
   titulo: string;
-  tipo: string;
-  fecha: string; // ISO string
-  precio: number;
-  importante?: boolean; // opcional, para ngClass / ngStyle
+  fecha: string;
+  lugar: string;
+  descripcion: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class Eventos {
-
-  private storageKey = 'eventos';
+export class EventosService {
   private eventos: Evento[] = [];
 
-  constructor() {
-    // Cargar eventos desde localStorage si existen
-    const datos = localStorage.getItem(this.storageKey);
-    if (datos) {
-      this.eventos = JSON.parse(datos);
-    }
-  }
-
-  // Devuelve copia de eventos
-  getEventos(): Evento[] {
-    return [...this.eventos];
-  }
-
-  // Añadir evento
-  addEvento(evento: Evento) {
-    evento.id = this.eventos.length > 0 ? this.eventos[this.eventos.length - 1].id + 1 : 1;
+  agregarEvento(evento: Evento) {
     this.eventos.push(evento);
-    this.guardar();
+    localStorage.setItem('eventos', JSON.stringify(this.eventos));
   }
 
-  // Eliminar evento por id
-  deleteEvento(id: number) {
-    this.eventos = this.eventos.filter(e => e.id !== id);
-    this.guardar();
-  }
-
-  // Guardar en localStorage
-  private guardar() {
-    localStorage.setItem(this.storageKey, JSON.stringify(this.eventos));
+  obtenerEventos(): Evento[] {
+    const guardados = localStorage.getItem('eventos');
+    if (guardados) this.eventos = JSON.parse(guardados);
+    return this.eventos;
   }
 }

@@ -1,44 +1,45 @@
+// src/app/components/crear-evento/crear-evento.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Eventos, Evento } from '../../services/eventos';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { EventosService, Evento } from '../../services/eventos';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-crear-evento',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './crear-evento.component.html',
-  styleUrls: ['./crear-evento.component.css']
+  imports: [CommonModule, ReactiveFormsModule, NgIf, NgFor],
+  templateUrl: './crear-evento.html',
+  styleUrls: ['./crear-evento.css']
 })
 export class CrearEvento {
-
-  eventoForm: FormGroup;
-  tiposEvento = ['Concierto', 'Conferencia', 'Taller', 'Otro'];
+  formEvento: FormGroup;
   enviado = false;
+  mensaje = '';
 
-  constructor(private fb: FormBuilder, private eventosService: Eventos) {
-    this.eventoForm = this.fb.group({
+  constructor(private fb: FormBuilder, private eventosService: EventosService, private router: Router) {
+    this.formEvento = this.fb.group({
       titulo: ['', [Validators.required, Validators.minLength(3)]],
-      tipo: ['', Validators.required],
+      descripcion: ['', Validators.required],
       fecha: ['', Validators.required],
-      precio: [0, [Validators.required, Validators.min(0)]],
-      importante: [false],
-      descripcion: ['']
+      lugar: ['', Validators.required],
+      precio: ['', [Validators.required, Validators.min(0)]]
     });
   }
 
-  guardarEvento() {
-    this.enviado = true;
-    if (this.eventoForm.valid) {
-      const evento: Evento = this.eventoForm.value;
-      this.eventosService.addEvento(evento);
-      alert('Evento guardado correctamente ✅');
-      this.eventoForm.reset({ precio: 0, importante: false });
-      this.enviado = false;
-    }
+  get f() {
+    return this.formEvento.controls;
   }
 
-  get f() {
-    return this.eventoForm.controls;
+  onSubmit() {
+    this.enviado = true;
+    if (this.formEvento.valid) {
+      const nuevoEvento: Evento = this.formEvento.value;
+      this.eventosService.agregarEvento(nuevoEvento);
+      this.mensaje = 'Evento creado correctamente';
+      this.formEvento.reset();
+      this.enviado = false;
+    }
   }
 }

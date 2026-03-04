@@ -1,9 +1,9 @@
+// src/app/models/evento.model.ts
+
 export interface Evento {
-  id: number;
   titulo: string;
-  tipo: 'Concierto' | 'Conferencia' | 'Taller' | string;
-  fecha: string; // ISO string
-  precio: number;
-  importante?: boolean; // opcional, para ngClass / ngStyle
-  descripcion?: string; // opcional
+  descripcion: string;
+  fecha: string;      // formato ISO o dd/MM/yyyy
+  lugar: string;
+  precio?: number;    // opcional
 }

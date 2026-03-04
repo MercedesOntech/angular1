@@ -1,13 +1,14 @@
-/* Estilo básico para tablas y secciones */
-
-section {
-  margin-bottom: 2rem;
-}
-
+/* Estilos opcionales para el componente */
 table {
   width: 100%;
+  border-collapse: collapse;
 }
 
-h2, h4 {
-  color: #343a40;
+table th, table td {
+  text-align: left;
+  padding: 8px;
+}
+
+table th {
+  background-color: #f2f2f2;
 }

@@ -1,6 +1,8 @@
+// src/app/models/usuario.model.ts
+
 export interface Usuario {
   username: string;
   password: string;
-  nombreCompleto?: string; // opcional
-  email?: string;          // opcional
+  nombre?: string;   // opcional, si quieres almacenar nombre completo
+  email?: string;    // opcional
 }

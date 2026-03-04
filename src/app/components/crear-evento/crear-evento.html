@@ -1,57 +1,47 @@
 <div class="container mt-4">
   <h2>Crear Evento</h2>
-  <form [formGroup]="eventoForm" (ngSubmit)="guardarEvento()">
 
-    <!-- Título -->
+  <form [formGroup]="formEvento" (ngSubmit)="onSubmit()">
+
     <div class="mb-3">
       <label class="form-label">Título</label>
-      <input type="text" formControlName="titulo" class="form-control"
-        [ngClass]="{'is-invalid': enviado && f.titulo.invalid}">
-      <div class="invalid-feedback" *ngIf="f.titulo.errors?.required">El título es obligatorio.</div>
-      <div class="invalid-feedback" *ngIf="f.titulo.errors?.minlength">Mínimo 3 caracteres.</div>
+      <input type="text" class="form-control" formControlName="titulo" 
+             [ngClass]="{'is-invalid': enviado && f.titulo.invalid}">
+      <div class="invalid-feedback" *ngIf="f.titulo.errors?.['required']">El título es obligatorio</div>
+      <div class="invalid-feedback" *ngIf="f.titulo.errors?.['minlength']">Mínimo 3 caracteres</div>
     </div>
 
-    <!-- Tipo -->
-    <div class="mb-3">
-      <label class="form-label">Tipo de Evento</label>
-      <select formControlName="tipo" class="form-select"
-        [ngClass]="{'is-invalid': enviado && f.tipo.invalid}">
-        <option value="">-- Selecciona --</option>
-        <option *ngFor="let tipo of tiposEvento" [value]="tipo">{{ tipo }}</option>
-      </select>
-      <div class="invalid-feedback" *ngIf="f.tipo.errors?.required">El tipo es obligatorio.</div>
-    </div>
-
-    <!-- Fecha -->
-    <div class="mb-3">
-      <label class="form-label">Fecha</label>
-      <input type="date" formControlName="fecha" class="form-control"
-        [ngClass]="{'is-invalid': enviado && f.fecha.invalid}">
-      <div class="invalid-feedback" *ngIf="f.fecha.errors?.required">La fecha es obligatoria.</div>
-    </div>
-
-    <!-- Precio -->
-    <div class="mb-3">
-      <label class="form-label">Precio (€)</label>
-      <input type="number" formControlName="precio" class="form-control"
-        [ngClass]="{'is-invalid': enviado && f.precio.invalid}">
-      <div class="invalid-feedback" *ngIf="f.precio.errors?.required">El precio es obligatorio.</div>
-      <div class="invalid-feedback" *ngIf="f.precio.errors?.min">El precio debe ser ≥ 0.</div>
-    </div>
-
-    <!-- Importante -->
-    <div class="form-check mb-3">
-      <input type="checkbox" formControlName="importante" class="form-check-input" id="importante">
-      <label class="form-check-label" for="importante">Importante</label>
-    </div>
-
-    <!-- Descripción -->
     <div class="mb-3">
       <label class="form-label">Descripción</label>
-      <textarea formControlName="descripcion" rows="3" class="form-control"></textarea>
+      <textarea class="form-control" formControlName="descripcion" 
+                [ngClass]="{'is-invalid': enviado && f.descripcion.invalid}"></textarea>
+      <div class="invalid-feedback" *ngIf="f.descripcion.errors?.['required']">La descripción es obligatoria</div>
     </div>
 
-    <!-- Botón Guardar -->
-    <button type="submit" class="btn btn-primary">Guardar Evento</button>
+    <div class="mb-3">
+      <label class="form-label">Fecha</label>
+      <input type="date" class="form-control" formControlName="fecha" 
+             [ngClass]="{'is-invalid': enviado && f.fecha.invalid}">
+      <div class="invalid-feedback" *ngIf="f.fecha.errors?.['required']">La fecha es obligatoria</div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Lugar</label>
+      <input type="text" class="form-control" formControlName="lugar" 
+             [ngClass]="{'is-invalid': enviado && f.lugar.invalid}">
+      <div class="invalid-feedback" *ngIf="f.lugar.errors?.['required']">El lugar es obligatorio</div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Precio (€)</label>
+      <input type="number" class="form-control" formControlName="precio" 
+             [ngClass]="{'is-invalid': enviado && f.precio.invalid}">
+      <div class="invalid-feedback" *ngIf="f.precio.errors?.['required']">El precio es obligatorio</div>
+      <div class="invalid-feedback" *ngIf="f.precio.errors?.['min']">El precio no puede ser negativo</div>
+    </div>
+
+    <button class="btn btn-success" type="submit">Crear Evento</button>
   </form>
+
+  <div class="alert alert-success mt-3" *ngIf="mensaje">{{ mensaje }}</div>
 </div>

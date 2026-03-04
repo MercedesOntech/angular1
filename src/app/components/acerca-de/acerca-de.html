@@ -1,80 +1,90 @@
 <div class="container mt-4">
 
-  <h2 class="mb-3">Acerca de</h2>
+  <h2>Acerca del autor</h2>
+  <p><strong>Nombre:</strong> Mercedes Romero</p>
+  <p><strong>Email:</strong> mercedes.romero@example.com</p>
 
-  <!-- Información del autor -->
-  <section class="mb-4">
-    <h4>Autor</h4>
-    <p><strong>Nombre:</strong> {{ autor.nombre }}</p>
-    <p><strong>Email:</strong> {{ autor.email }}</p>
-    <p><strong>GitHub:</strong> <a [href]="autor.github" target="_blank">{{ autor.github }}</a></p>
-  </section>
+  <hr>
 
-  <!-- Tecnologías -->
-  <section class="mb-4">
-    <h4>Tecnologías y herramientas utilizadas</h4>
-    <table class="table table-bordered table-striped">
-      <thead class="table-light">
-        <tr>
-          <th>Tipo</th>
-          <th>Herramientas</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let tech of tecnologias">
-          <td>{{ tech.tipo }}</td>
-          <td>{{ tech.herramientas }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+  <h3>Herramientas y tecnologías utilizadas</h3>
+  <ul>
+    <li>Angular 21 (standalone components)</li>
+    <li>TypeScript</li>
+    <li>Bootstrap 5</li>
+    <li>XAMPP / Docker (para despliegue)</li>
+    <li>Visual Studio Code</li>
+    <li>Base de datos: WebStorage / localStorage</li>
+  </ul>
 
-  <!-- Directivas usadas -->
-  <section class="mb-4">
-    <h4>Directivas usadas</h4>
-    <table class="table table-bordered table-striped">
-      <thead class="table-light">
-        <tr>
-          <th>Directiva</th>
-          <th>Tipo</th>
-          <th>Componente</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let dir of directivas">
-          <td>{{ dir.nombre }}</td>
-          <td>{{ dir.tipo }}</td>
-          <td>{{ dir.componente }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+  <hr>
 
-  <!-- Usuarios de prueba -->
-  <section class="mb-4">
-    <h4>Usuarios de prueba</h4>
-    <table class="table table-bordered table-striped">
-      <thead class="table-light">
-        <tr>
-          <th>Usuario</th>
-          <th>Contraseña</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let u of usuarios">
-          <td>{{ u.username }}</td>
-          <td>{{ u.password }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+  <h3>Directivas utilizadas</h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Directiva</th>
+        <th>Tipo</th>
+        <th>Componente usado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>*ngIf</td>
+        <td>Control de flujo</td>
+        <td>Header, Login</td>
+      </tr>
+      <tr>
+        <td>*ngFor</td>
+        <td>Control de flujo</td>
+        <td>Home, Eventos</td>
+      </tr>
+      <tr>
+        <td>*ngSwitch</td>
+        <td>Control de flujo</td>
+        <td>CrearEvento (ejemplo validación)</td>
+      </tr>
+      <tr>
+        <td>[ngClass]</td>
+        <td>Estilo dinámico</td>
+        <td>Login</td>
+      </tr>
+      <tr>
+        <td>[ngStyle]</td>
+        <td>Estilo dinámico</td>
+        <td>EventoCard</td>
+      </tr>
+    </tbody>
+  </table>
 
-  <!-- Bibliografía -->
-  <section class="mb-4">
-    <h4>Bibliografía</h4>
-    <ul>
-      <li *ngFor="let b of bibliografia">{{ b }}</li>
-    </ul>
-  </section>
+  <hr>
+
+  <h3>Usuarios para login</h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Usuario</th>
+        <th>Contraseña</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>admin</td>
+        <td>1234</td>
+      </tr>
+      <tr>
+        <td>user</td>
+        <td>abcd</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h3>Bibliografía</h3>
+  <ul>
+    <li>Apuntes de clase proporcionados por el profesor</li>
+    <li>Documentación oficial de Angular 21</li>
+    <li>Documentación de Bootstrap 5</li>
+  </ul>
 
 </div>

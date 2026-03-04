@@ -1,16 +1,13 @@
 <div class="container mt-4">
   <h2>Lista de Eventos</h2>
 
-  <!-- Mensaje si no hay eventos -->
-  <div *ngIf="eventos.length === 0" class="alert alert-info">
-    No hay eventos disponibles.
+  <div class="row">
+    <div class="col-md-4" *ngFor="let evento of eventos">
+      <app-evento-card [evento]="evento"></app-evento-card>
+    </div>
   </div>
 
-  <!-- Listado de eventos -->
-  <div *ngFor="let evento of eventos">
-    <app-evento-card 
-      [evento]="evento" 
-      (borrar)="eliminarEvento($event)">
-    </app-evento-card>
+  <div *ngIf="eventos.length === 0" class="alert alert-info mt-3">
+    No hay eventos creados todavía.
   </div>
 </div>

@@ -1,15 +1,14 @@
 <div class="container mt-4 text-center">
-
   <h2>Bienvenido a EventMaster</h2>
   <p>Gestiona tus eventos de manera fácil y rápida</p>
 
-  <!-- Imágenes del home -->
   <div class="row justify-content-center mt-4">
-    <div class="col-md-4 mb-3" *ngFor="let img of imagenes">
-      <div class="card">
-        <img [src]="img" class="card-img-top" alt="Imagen de evento">
+    <ng-container *ngFor="let img of imagenes">
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <img [src]="img" class="card-img-top" alt="Imagen de evento">
+        </div>
       </div>
-    </div>
+    </ng-container>
   </div>
-
 </div>
