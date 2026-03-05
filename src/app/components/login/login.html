@@ -1,7 +1,8 @@
+<!-- login.html -->
 <div class="container mt-5" style="max-width: 400px;">
   <h3 class="text-center mb-4">Iniciar Sesión</h3>
 
-  <form (ngSubmit)="login()">
+  <form (ngSubmit)="login()" #f="ngForm">
 
     <div class="mb-3">
       <label class="form-label">Usuario</label>
@@ -10,17 +11,25 @@
         class="form-control"
         [(ngModel)]="usuario"
         name="usuario"
-        required>
+        required
+        #usuarioInput="ngModel">
+      <div class="invalid-feedback" *ngIf="f.submitted && usuarioInput.errors?.['required']">
+        El usuario es obligatorio
+      </div>
     </div>
 
     <div class="mb-3">
       <label class="form-label">Contraseña</label>
       <input 
-        type="password"
+        type="password" 
         class="form-control"
         [(ngModel)]="password"
         name="password"
-        required>
+        required
+        #passInput="ngModel">
+      <div class="invalid-feedback" *ngIf="f.submitted && passInput.errors?.['required']">
+        La contraseña es obligatoria
+      </div>
     </div>
 
     <button type="submit" class="btn btn-primary w-100">

@@ -1,0 +1,29 @@
+<!-- src/app/components/actualizar-evento/actualizar-evento.html -->
+<div class="container mt-4">
+  <h2>Actualizar Evento</h2>
+
+  <form #form="ngForm" (ngSubmit)="guardar(form)">
+    <div class="mb-3">
+      <label>Título</label>
+      <input type="text" class="form-control" name="titulo" [(ngModel)]="titulo" required>
+    </div>
+    <div class="mb-3">
+      <label>Descripción</label>
+      <textarea class="form-control" name="descripcion" [(ngModel)]="descripcion" required></textarea>
+    </div>
+    <div class="mb-3">
+      <label>Fecha</label>
+      <input type="date" class="form-control" name="fecha" [(ngModel)]="fecha" required>
+    </div>
+    <div class="mb-3">
+      <label>Lugar</label>
+      <input type="text" class="form-control" name="lugar" [(ngModel)]="lugar" required>
+    </div>
+    <div class="mb-3">
+      <label>Precio</label>
+      <input type="number" class="form-control" name="precio" [(ngModel)]="precio" required min="0">
+    </div>
+
+    <button class="btn btn-primary w-100" type="submit">Actualizar Evento</button>
+  </form>
+</div>

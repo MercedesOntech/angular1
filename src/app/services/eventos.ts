@@ -27,4 +27,16 @@ export class EventoService {
   eliminarEvento(index: number) {
     this.eventos.splice(index, 1);
   }
+
+  // ← NUEVO MÉTODO
+  actualizarEvento(eventoAntiguo: Evento, eventoNuevo: Evento) {
+    const index = this.eventos.findIndex(e => 
+      e.titulo === eventoAntiguo.titulo &&
+      e.fecha === eventoAntiguo.fecha &&
+      e.lugar === eventoAntiguo.lugar
+    );
+    if (index !== -1) {
+      this.eventos[index] = eventoNuevo;
+    }
+  }
 }
