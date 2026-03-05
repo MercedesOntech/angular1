@@ -21,7 +21,11 @@ Aplicación SPA para gestión de eventos, con login, creación, listado y borrad
 2. `docker run -p 4200:4200 mercedes-angular`
 
 ## Usuarios de prueba
-| Usuario | Contraseña | Rol |
-|---------|------------|-----|
-| admin   | 1234       | Administrador |
-| user    | abcd       | Usuario normal |
+----------------------------
+| Usuario  | Contraseña    |
+|----------|---------------|
+| admin    | 1234          |
+| mercedes | 1111          |
+| invitado | 0000          |
+| Mercedes | Mercedes_1365 |
+----------------------------

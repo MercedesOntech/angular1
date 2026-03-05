@@ -1,118 +1,77 @@
+<!-- src/app/components/crear-evento/crear-evento.html -->
 <div class="container mt-4">
+  <h2>{{ eventoEdit ? 'Editar Evento' : 'Crear Evento' }}</h2>
 
-  <h2>Acerca del autor</h2>
-  <p><strong>Nombre:</strong> Mercedes Romero</p>
-  <p><strong>Email:</strong> mercedes.romero@example.com</p>
-  <p><strong>Teléfono:</strong> +34 600 123 456</p>
-  <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/mercedes-romero" target="_blank">linkedin.com/in/mercedes-romero</a></p>
-  <p><strong>GitHub:</strong> <a href="https://github.com/MercedesOntech" target="_blank">github.com/MercedesOntech</a></p>
-  <p>Soy desarrolladora web enfocada en Angular y TypeScript, con experiencia en aplicaciones SPA, diseño responsivo y buenas prácticas en front-end.</p>
+  <form #form="ngForm" (ngSubmit)="guardar(form)">
 
-  <hr>
+    <!-- Título -->
+    <div class="mb-3">
+      <label class="form-label">Título</label>
+      <input type="text" class="form-control" name="titulo" [(ngModel)]="titulo"
+             [ngClass]="{'is-invalid': enviado && form.controls['titulo']?.invalid}"
+             required minlength="3">
 
-  <h3>Herramientas y tecnologías utilizadas</h3>
-  <ul>
-    <li>Angular 21 (Standalone Components)</li>
-    <li>TypeScript 5+</li>
-    <li>Bootstrap 5.3</li>
-    <li>XAMPP / Docker (para despliegue local y contenedores)</li>
-    <li>Visual Studio Code + extensiones Angular/TypeScript</li>
-    <li>Base de datos local: WebStorage / localStorage (simulación de eventos y usuarios)</li>
-  </ul>
+      <!-- Mensajes de error con ngSwitch seguro -->
+      <ng-container *ngIf="form.controls['titulo'] as tituloControl">
+        <div [ngSwitch]="tituloControl.errors ? (tituloControl.errors['required'] ? 'required' : 'minlength') : null">
+          <p *ngSwitchCase="'required'" class="text-danger">
+            El título es obligatorio
+          </p>
+          <p *ngSwitchCase="'minlength'" class="text-danger">
+            Mínimo 3 caracteres
+          </p>
+          <p *ngSwitchDefault></p>
+        </div>
+      </ng-container>
+    </div>
 
-  <hr>
+    <!-- Descripción -->
+    <div class="mb-3">
+      <label class="form-label">Descripción</label>
+      <textarea class="form-control" name="descripcion" [(ngModel)]="descripcion"
+                [ngClass]="{'is-invalid': enviado && form.controls['descripcion']?.invalid}"
+                required></textarea>
+      <div class="invalid-feedback" *ngIf="form.controls['descripcion']?.errors?.['required']">
+        La descripción es obligatoria
+      </div>
+    </div>
 
-  <h3>Directivas utilizadas</h3>
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Directiva</th>
-        <th>Tipo</th>
-        <th>Componente usado</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>*ngIf</td>
-        <td>Control de flujo</td>
-        <td>Header, Login, Eventos (mensaje "No hay eventos")</td>
-      </tr>
-      <tr>
-        <td>*ngFor</td>
-        <td>Control de flujo</td>
-        <td>Home (imágenes), Eventos (lista de eventos)</td>
-      </tr>
-      <tr>
-        <td>*ngSwitch / *ngSwitchCase / *ngSwitchDefault</td>
-        <td>Control de flujo</td>
-        <td>CrearEvento (mensajes de validación de campos)</td>
-      </tr>
-      <tr>
-        <td>[ngClass]</td>
-        <td>Estilo dinámico</td>
-        <td>Login, CrearEvento</td>
-      </tr>
-      <tr>
-        <td>[ngStyle]</td>
-        <td>Estilo dinámico</td>
-        <td>Eventos (precio en rojo si >50€, verde si <=50€)</td>
-      </tr>
-      <tr>
-        <td>Pipe personalizada (mayusculas)</td>
-        <td>Transformación de datos</td>
-        <td>Eventos (titulo)</td>
-      </tr>
-      <tr>
-        <td>Pipes integradas (DatePipe, CurrencyPipe)</td>
-        <td>Transformación de datos</td>
-        <td>Eventos (fecha y precio)</td>
-      </tr>
-      <tr>
-        <td>@Input (opcional)</td>
-        <td>Comunicación padre → hijo</td>
-        <td>CrearEvento (se puede usar para editar datos desde un componente padre)</td>
-      </tr>
-      <tr>
-        <td>@Output (opcional)</td>
-        <td>Comunicación hijo → padre</td>
-        <td>CrearEvento (podría usarse para notificar creación de evento)</td>
-      </tr>
-    </tbody>
-  </table>
+    <!-- Fecha -->
+    <div class="mb-3">
+      <label class="form-label">Fecha</label>
+      <input type="date" class="form-control" name="fecha" [(ngModel)]="fecha"
+             [ngClass]="{'is-invalid': enviado && form.controls['fecha']?.invalid}" required>
+      <div class="invalid-feedback" *ngIf="form.controls['fecha']?.errors?.['required']">
+        La fecha es obligatoria
+      </div>
+    </div>
 
-  <hr>
+    <!-- Lugar -->
+    <div class="mb-3">
+      <label class="form-label">Lugar</label>
+      <input type="text" class="form-control" name="lugar" [(ngModel)]="lugar"
+             [ngClass]="{'is-invalid': enviado && form.controls['lugar']?.invalid}" required>
+      <div class="invalid-feedback" *ngIf="form.controls['lugar']?.errors?.['required']">
+        El lugar es obligatorio
+      </div>
+    </div>
 
-  <h3>Usuarios para login</h3>
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Usuario</th>
-        <th>Contraseña</th>
-        <th>Rol</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>admin</td>
-        <td>1234</td>
-        <td>Administrador</td>
-      </tr>
-      <tr>
-        <td>user</td>
-        <td>abcd</td>
-        <td>Usuario normal</td>
-      </tr>
-    </tbody>
-  </table>
+    <!-- Precio -->
+    <div class="mb-3">
+      <label class="form-label">Precio</label>
+      <input type="number" class="form-control" name="precio" [(ngModel)]="precio"
+             [ngClass]="{'is-invalid': enviado && form.controls['precio']?.invalid}" required min="0">
+      <div class="invalid-feedback" *ngIf="form.controls['precio']?.errors?.['required']">
+        El precio es obligatorio
+      </div>
+      <div class="invalid-feedback" *ngIf="form.controls['precio']?.errors?.['min']">
+        El precio no puede ser negativo
+      </div>
+    </div>
 
-  <hr>
+    <button type="submit" class="btn btn-primary w-100">
+      {{ eventoEdit ? 'Actualizar' : 'Guardar' }}
+    </button>
 
-  <h3>Bibliografía / Fuentes</h3>
-  <ul>
-    <li>Apuntes de clase proporcionados por el profesor</li>
-    <li>Documentación oficial de <a href="https://angular.io" target="_blank">Angular 21</a></li>
-    <li>Documentación oficial de <a href="https://getbootstrap.com" target="_blank">Bootstrap 5</a></li>
-    <li>Artículos y tutoriales de desarrollo SPA y buenas prácticas en TypeScript</li>
-  </ul>
-
+  </form>
 </div>

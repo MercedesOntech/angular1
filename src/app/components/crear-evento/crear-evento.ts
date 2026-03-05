@@ -1,5 +1,4 @@
-// src/app/components/crear-evento/crear-evento.ts
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,8 +12,9 @@ import { EventoService, Evento } from '../../services/eventos';
   styleUrls: ['./crear-evento.css']
 })
 export class CrearEvento {
-  
-  @Input() eventoEdit?: Evento;  // <-- @Input para recibir un evento
+
+  @Input() eventoEdit?: Evento;  // <-- Recibe un evento para editar
+  @Output() eventoGuardado = new EventEmitter<Evento>(); // <-- Notifica al padre
 
   titulo = '';
   descripcion = '';
@@ -27,7 +27,6 @@ export class CrearEvento {
 
   ngOnInit(): void {
     if (this.eventoEdit) {
-      // Si se pasa un evento, cargamos los datos en los campos
       this.titulo = this.eventoEdit.titulo;
       this.descripcion = this.eventoEdit.descripcion;
       this.fecha = this.eventoEdit.fecha;
@@ -48,12 +47,13 @@ export class CrearEvento {
       };
 
       if (this.eventoEdit) {
-        // Lógica si estamos editando: reemplazar evento en la lista
         this.eventoService.actualizarEvento(this.eventoEdit, nuevoEvento);
       } else {
-        // Si es nuevo
         this.eventoService.agregarEvento(nuevoEvento);
       }
+
+      // **Aquí lanzamos el evento para avisar al padre**
+      this.eventoGuardado.emit(nuevoEvento);
 
       form.resetForm();
       this.router.navigate(['/eventos']);

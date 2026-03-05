@@ -10,7 +10,7 @@
           <p class="card-text">{{ evento.descripcion }}</p>
           <p class="card-text"><strong>Fecha:</strong> {{ evento.fecha | date:'dd/MM/yyyy' }}</p>
           <p class="card-text"><strong>Lugar:</strong> {{ evento.lugar }}</p>
-          <p [ngStyle]="{'color': evento.precio > 50 ? 'red' : 'green'}" class="card-text">
+          <p [ngStyle]="{'color': evento.precio > 100 ? 'red' : 'green'}" class="card-text">
             <strong>Precio:</strong> {{ evento.precio | currency:'EUR' }}
           </p>
 
